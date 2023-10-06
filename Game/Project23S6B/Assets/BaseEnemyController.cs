@@ -2,17 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemyController : MonoBehaviour
+public class BaseEnemyController : MonoBehaviour,IDamageable
 {
-    // Start is called before the first frame update
+
+    [SerializeField]
+    float maxHealth = 5f;
+    [SerializeField]
+    float health;
+    BaseEnemyAttackController attackController;
+    BaseEnemyMovementScript movementScript;
+
     void Start()
     {
-        
+        health = maxHealth;
+        attackController = GetComponent<BaseEnemyAttackController>();
+        movementScript = GetComponent<BaseEnemyMovementScript>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        movementScript.controlMovement();
+        attackController.controlAttack();
     }
+    private void die()
+    {
+        Destroy(gameObject);
+    }
+
+
+    public void recceiveDamage(DamageEvent damageEvent)
+    {
+        health = health - damageEvent.damageAmount;
+        if(health < 0)
+        {
+            die();
+        }
+
+    }
+
+
 }
