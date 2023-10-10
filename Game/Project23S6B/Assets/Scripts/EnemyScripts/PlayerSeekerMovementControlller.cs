@@ -6,21 +6,18 @@ using UnityEngine;
 public class PlayerSeekerMovementControlller : BaseEnemyMovementScript
 {
 
-    [SerializeField]
-    GameObject player;
-    Seeker seeker;
+    AIDestinationSetter setter;
 
     // Start is called before the first frame update
     void Start()
     {
-        seeker = GetComponent<Seeker>();
         
+        setter = GetComponent<AIDestinationSetter>();
+        setter.target = player.transform;
     }
 
     public override void controlMovement()
     {
         base.controlMovement();
-        seeker.StartPath(this.transform.position, player.transform.position);
-        //TODO make the pathfinding work
     }
 }

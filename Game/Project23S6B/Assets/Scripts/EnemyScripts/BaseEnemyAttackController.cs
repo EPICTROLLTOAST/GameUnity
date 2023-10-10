@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseEnemyAttackController : MonoBehaviour
 {
-
+    public GameObject player;
     Vector2 startPos;
     [SerializeField]
     bool movementLockFlag = false;
