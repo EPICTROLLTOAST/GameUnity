@@ -12,11 +12,18 @@ public class BasePlayerController : MonoBehaviour
     [SerializeField]
     float walkingSpeed = 1f;
 
+    PlayerInventory playerInventory;
+
     // Start is called before the first frame update
     void Start()
     {
         player = this.gameObject;
         rigidbody = player.GetComponent<Rigidbody2D>();
+
+        //inventory test
+        playerInventory = new PlayerInventory();
+        playerInventory.addToInventory(new BaseItem("0", "testItemName"));
+        playerInventory.displayInventory();
     }
 
     // Update is called once per frame
