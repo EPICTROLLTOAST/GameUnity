@@ -30,17 +30,12 @@ public class PlayerInventory
         inventory.Remove(item);
     }
 
-    public void displayInventory()
+    public void displayInventoryToConsole()
     {
         //Displays inventory of player to console
-        //foreach (BaseItem item in inventory)
-        //{
-        //    string output = item.itemID + item.itemName;
-        //    Debug.Log(output);
-        //}
-
-        BaseItem outputItem = (BaseItem) inventory[0];
-        Debug.Log(outputItem.itemName);
+        foreach (BaseItem item in inventory)
+        {
+            Debug.Log(item.itemID + " " + item.itemName);
+        }
     }
-
 }

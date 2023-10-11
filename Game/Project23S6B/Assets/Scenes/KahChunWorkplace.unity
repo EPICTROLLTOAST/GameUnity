@@ -509,7 +509,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &343004101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,6 +1589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd9f9a7080ee7d41a670290a53cf331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   movementLockFlag: 0
   range: 1
   damage: 1
@@ -2015,6 +2016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae31442cee2c43641a9be60c9075eb0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   movementLockFlag: 0
 --- !u!114 &1792869016
 MonoBehaviour:
@@ -2028,6 +2030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed56018a96269e64c8963d4934a76759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &1841288397
 GameObject:
   m_ObjectHideFlags: 0
