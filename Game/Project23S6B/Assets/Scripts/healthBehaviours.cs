@@ -20,7 +20,7 @@ public class DamageEvent
     public damageTypes damageType;
     public GameObject attacker;
     public GameObject target;
-
+    
     public DamageEvent(float damageAmount, damageTypes damageType, GameObject attacker, GameObject target)
     {
         this.damageAmount = damageAmount;
@@ -28,6 +28,7 @@ public class DamageEvent
         this.attacker = attacker;
         this.target = target;
         target.GetComponent<IDamageable>().recceiveDamage(this);
+        
     }
 
 
