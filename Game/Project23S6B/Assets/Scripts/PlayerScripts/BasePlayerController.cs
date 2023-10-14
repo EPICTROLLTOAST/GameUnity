@@ -68,8 +68,8 @@ public class BasePlayerController : MonoBehaviour
         playerInventory.displayInventoryToConsole();
     }
 
-    public void leftClickEvent()
+    public PlayerInventory getPlayerInventory()
     {
-
+        return playerInventory;
     }
 }
