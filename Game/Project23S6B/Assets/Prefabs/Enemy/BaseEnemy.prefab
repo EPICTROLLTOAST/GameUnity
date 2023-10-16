@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6349946668333494273}
   - component: {fileID: 1429946774916907515}
-  - component: {fileID: 6507232743800182660}
-  - component: {fileID: 8575533251300053388}
-  - component: {fileID: 4287802485748844903}
+  - component: {fileID: 6972008021963602562}
   - component: {fileID: 8804135607160371784}
   - component: {fileID: 771282104473327420}
   - component: {fileID: 6668182644720791082}
@@ -91,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6507232743800182660
+--- !u!114 &6972008021963602562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,38 +98,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 7259936490152643831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d69f1b707f95470459af8b9c85fefaf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 523a3c918663da948a3d32d6f675dcaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 0
---- !u!114 &8575533251300053388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7259936490152643831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed56018a96269e64c8963d4934a76759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
---- !u!114 &4287802485748844903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7259936490152643831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae31442cee2c43641a9be60c9075eb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  movementLockFlag: 0
+  mode: 0
+  target: {fileID: 0}
+  wanderDev: 0
+  wanderIters: 0
+  wanderRange: 0
+  wanderRandomness: 0
+  wanderRandomRange: 0
+  LOSRadius: 0
+  LOSDeviation: 0
+  LOSIterations: 0
+  LOSRangeIterations: 0
+  LOSMinRadius: 0
+  LOSRangeRandomness: 0
+  LOSRandomness: 0
+  wanderFlag: 0
+  stayAtRadiusWithLOSFlag: 0
+  wanderDest: {x: 0, y: 0, z: 0}
+  stayAtRadiusWithLOSDest: {x: 0, y: 0, z: 0}
+  timesRun: 0
 --- !u!70 &8804135607160371784
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
