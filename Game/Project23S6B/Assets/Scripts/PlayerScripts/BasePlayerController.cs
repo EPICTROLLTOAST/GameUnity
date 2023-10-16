@@ -50,26 +50,11 @@ public class BasePlayerController : MonoBehaviour
         }
 
         rigidbody.velocity = velocity;
-
-        //mouse actions
-        if (Input.GetMouseButtonDown(0))
-        {
-            playerInventory.getHeldItem().leftClickAction();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            playerInventory.getHeldItem().rightClickAction();
-        }
     }
 
     public void pickUpItem(BaseItem item)
     {
         playerInventory.addToInventory(item);
         playerInventory.displayInventoryToConsole();
-    }
-
-    public PlayerInventory getPlayerInventory()
-    {
-        return playerInventory;
     }
 }
