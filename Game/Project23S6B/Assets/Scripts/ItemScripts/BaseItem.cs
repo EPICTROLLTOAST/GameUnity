@@ -11,14 +11,4 @@ public class BaseItem
         itemID = id;
         itemName = name;
     }
-
-    public virtual void leftClickAction()
-    {
-        Debug.Log("LEFT CLICK" + ' '  + itemID + ' ' + itemName);
-    }
-
-    public virtual void rightClickAction()
-    {
-        Debug.Log("RIGHT CLICK" + ' '  + itemID + ' ' + itemName);
-    }
 }

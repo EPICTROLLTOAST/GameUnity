@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour
     void Start()
     {
         playerControllerScript = player.GetComponent<BasePlayerController>();
-        item = new UsableItem("0", "triangle"); //for testing 
+        item = new BaseItem("0", "triangle");
     }
 
     // Update is called once per frame
