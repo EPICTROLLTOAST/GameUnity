@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     public EnemyMovementManager movementManager;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         player = GameObject.FindWithTag("Player");
         movementManager = this.gameObject.GetComponent<EnemyMovementManager>();

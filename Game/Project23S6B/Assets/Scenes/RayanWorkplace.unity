@@ -889,6 +889,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 556683364905635118, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6349946668333494273, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.13
@@ -929,6 +933,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6668182644720791082, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: gravity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668182644720791082, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: gravity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668182644720791082, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: gravity.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 343004095}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: wanderDev
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: wanderIters
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: wanderRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: wanderRandomness
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972008021963602562, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
+      propertyPath: wanderRandomRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7259936490152643831, guid: 5ea6ea01e592f9647970fe9c0e4a8fd2, type: 3}
       propertyPath: m_Name
       value: Zombie
@@ -958,7 +1002,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9ea8f00506a824891862ccbdec01ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 0
+  player: {fileID: 0}
+  movementLockFlag: 0
+  movementManager: {fileID: 0}
+  attackDistance: 1
+  playerPresence: 0
+  distanceToRecogPlayer: 10
+  timeToSpawnAttack: 0.2
+  timeForFollowUp: 0.2
+  inAttack: 0
 --- !u!1 &508422423
 GameObject:
   m_ObjectHideFlags: 0

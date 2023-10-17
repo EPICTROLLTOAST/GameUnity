@@ -18,6 +18,7 @@ public class EnemyMovementManager : MonoBehaviour
 
     GameObject player;
     AIPath pathfinder;
+    AIDestinationSetter destinationSetter;
 
     public enum movementModes
     {
@@ -66,6 +67,7 @@ public class EnemyMovementManager : MonoBehaviour
     {
         player = GameObject.Find("Kid");
         pathfinder = GetComponent<AIPath>();
+        destinationSetter = GetComponent<AIDestinationSetter>();
         StartCoroutine(switchModes());
     }
 
@@ -81,6 +83,7 @@ public class EnemyMovementManager : MonoBehaviour
         {
             switch (mode)
             {
+                
                 case movementModes.idle:
                     prepIdle();
                     break;
@@ -122,6 +125,7 @@ public class EnemyMovementManager : MonoBehaviour
             baseRange = wanderRange;
             wanderRadius();
             wanderFlag = true;
+            destinationSetter.target = null;
         }
         else
         {
@@ -150,7 +154,7 @@ public class EnemyMovementManager : MonoBehaviour
             rangeRange = LOSRangeRandomness;
             stayAtRadiusWithLOSFlag = true;
             stayAtRadiusWithLOS();
-
+            destinationSetter.target = null;
         }
         else
         {
@@ -197,7 +201,7 @@ public class EnemyMovementManager : MonoBehaviour
 
     void charge()
     {
-        pathfinder.destination = player.transform.position;
+        destinationSetter.target = target.transform;
     }
 
 
