@@ -10,7 +10,7 @@ public class BasePlayerController : MonoBehaviour
     Rigidbody2D rigidbody;
     Vector2 velocity;
     [SerializeField]
-    float walkingSpeed = 1f;
+    
 
     PlayerInventory playerInventory = new PlayerInventory();
 
@@ -24,32 +24,14 @@ public class BasePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = new Vector2 (0f , 0f);
-        if (Input.GetKey(KeyCode.W))
-        {
-            velocity.y += walkingSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            velocity.y -= walkingSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            velocity.x += walkingSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            velocity.x -= walkingSpeed;
-        }
+        movePlayer();
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             print("Hello!");
             //Just call a new damage event to damage someone
             new DamageEvent(5f, damageTypes.FIRE, player, player);
         }
-
-        rigidbody.velocity = velocity;
 
         //mouse actions
         if (Input.GetMouseButtonDown(0))
@@ -60,6 +42,56 @@ public class BasePlayerController : MonoBehaviour
         {
             playerInventory.getHeldItem().rightClickAction();
         }
+    }
+
+    float walkingSpeed = 7.5f;
+    float runningSpeed = 15f;
+
+    public void movePlayer()
+    {
+        velocity = new Vector2 (0f , 0f);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                velocity.y += runningSpeed;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                velocity.y -= runningSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                velocity.x += runningSpeed;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                velocity.x -= runningSpeed;
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                velocity.y += walkingSpeed;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                velocity.y -= walkingSpeed;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                velocity.x += walkingSpeed;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                velocity.x -= walkingSpeed;
+            }
+        }
+
+        rigidbody.velocity = velocity;
     }
 
     public void pickUpItem(BaseItem item)
