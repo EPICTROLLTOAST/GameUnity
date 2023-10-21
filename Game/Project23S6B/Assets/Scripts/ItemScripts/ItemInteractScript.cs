@@ -9,7 +9,7 @@ public class ItemInteractScript : BaseInteractScript
     private BasePlayerController playerControllerScript;
     bool playerInRange = false;
 
-    void Start()
+    public override void Start()
     {
         base.Start();
         playerControllerScript = getPlayerGameObject().GetComponent<BasePlayerController>();

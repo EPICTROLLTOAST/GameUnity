@@ -26,7 +26,6 @@ public class BaseInteractScript : MonoBehaviour
             if( distance <= INTERACT_DISTANCE){
                 playerPresent(distance);
             }
-            Debug.Log("COROUTINE STARTED"); //for testing
             yield return new WaitForSeconds(REFRESH_TIME);
         }
         

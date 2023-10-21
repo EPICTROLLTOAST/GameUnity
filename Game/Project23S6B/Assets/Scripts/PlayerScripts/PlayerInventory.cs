@@ -40,7 +40,7 @@ public class PlayerInventory
         //Displays inventory of player to console
         foreach (BaseItem item in inventory)
         {
-            Debug.Log(item.itemID + " " + item.itemName);
+            Debug.Log("IN INVENTORY " + item.itemID + " " + item.itemName);
         }
     }
 
