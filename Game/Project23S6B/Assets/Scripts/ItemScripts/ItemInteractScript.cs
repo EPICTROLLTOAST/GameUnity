@@ -9,11 +9,16 @@ public class ItemInteractScript : BaseInteractScript
     private BasePlayerController playerControllerScript;
     bool playerInRange = false;
 
+    [SerializeField] string itemID;
+    [SerializeField] string itemName;
+
+
+
     public override void Start()
     {
         base.Start();
         playerControllerScript = getPlayerGameObject().GetComponent<BasePlayerController>();
-        item = new UsableItem("0", "triangle"); //for testing 
+        item = new UsableItem(itemID, itemName); //for testing 
     }
 
     void Update()
@@ -28,7 +33,10 @@ public class ItemInteractScript : BaseInteractScript
     public override void playerPresent(float distance)
     {
         playerInRange = true;
+    }
 
-        //TODO: add function to set playerInRange to false after player out of range
+    public override void playerNotPresent(float distance)
+    {
+        playerInRange = false;
     }
 }

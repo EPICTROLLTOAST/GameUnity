@@ -23,8 +23,13 @@ public class BaseInteractScript : MonoBehaviour
         while (true)
         {
             float distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
-            if( distance <= INTERACT_DISTANCE){
+            if( distance <= INTERACT_DISTANCE)
+            {
                 playerPresent(distance);
+            }
+            else
+            {
+                playerNotPresent(distance);
             }
             yield return new WaitForSeconds(REFRESH_TIME);
         }
@@ -32,6 +37,10 @@ public class BaseInteractScript : MonoBehaviour
     }
 
     public virtual void playerPresent(float distance){
+        print("The player is " + distance + " units away!");
+    }
+
+    public virtual void playerNotPresent(float distance){
         print("The player is " + distance + " units away!");
     }
 
