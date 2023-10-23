@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventory
 {
     public ArrayList inventory = new ArrayList();
+
+    public int heldItemIndex = -1; //index of item held in hand, -1 if none
+    private BaseItem heldItem = null;
 
     public PlayerInventory(){
         ArrayList inventory = new ArrayList();
@@ -13,6 +17,7 @@ public class PlayerInventory
     public void addToInventory(BaseItem item) //adds item to player inventory
     {
         inventory.Add(item);
+        changeHeldItem(0); //for testing to set current held item
     }
 
     public void removeFromInventory(BaseItem item, bool destroyItem=false) 
@@ -35,7 +40,18 @@ public class PlayerInventory
         //Displays inventory of player to console
         foreach (BaseItem item in inventory)
         {
-            Debug.Log(item.itemID + " " + item.itemName);
+            Debug.Log("IN INVENTORY " + item.itemID + " " + item.itemName);
         }
+    }
+
+    public void changeHeldItem(int newHeldItemIndex)
+    {
+        heldItem = (BaseItem) inventory[newHeldItemIndex];
+        heldItemIndex = newHeldItemIndex;
+    }
+
+    public BaseItem getHeldItem()
+    {
+        return heldItem;
     }
 }
