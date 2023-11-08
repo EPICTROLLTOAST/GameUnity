@@ -37,11 +37,11 @@ public class BaseInteractScript : MonoBehaviour
     }
 
     public virtual void playerPresent(float distance){
-        
+        print("The player is " + distance + " units away!");
     }
 
     public virtual void playerNotPresent(float distance){
-        
+        print("The player is " + distance + " units away!");
     }
 
     public GameObject getPlayerGameObject()
