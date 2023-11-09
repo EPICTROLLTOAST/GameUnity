@@ -18,7 +18,7 @@ public class ItemInteractScript : BaseInteractScript
     {
         base.Start();
         playerControllerScript = getPlayerGameObject().GetComponent<BasePlayerController>();
-        item = new UsableItem(itemID, itemName); //for testing 
+        item = new UsableItem(itemName); //for testing 
     }
 
     void Update()

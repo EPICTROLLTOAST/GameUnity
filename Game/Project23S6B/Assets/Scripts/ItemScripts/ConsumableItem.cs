@@ -5,9 +5,8 @@ using UnityEngine;
 public class ConsumableItem: BaseItem
 {
     //constructor
-    public ConsumableItem (string id, string name) : base(id, name)
+    public ConsumableItem (string name): base(name)
     {
-        
 
     }
     public int itemCount;

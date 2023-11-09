@@ -5,7 +5,7 @@ using UnityEngine;
 public class EquipableItem: BaseItem //stuffs like armour and accessories that only have an equip/unequip action
 {   
     //constructor
-    public EquipableItem (string id, string name) : base(id, name)
+    public EquipableItem (string name) : base(name)
     {
 
     }

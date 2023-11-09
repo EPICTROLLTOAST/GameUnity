@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThrowableItem: BaseItem
 {
     //constructor
-    public ThrowableItem (string id, string name) : base(id, name)
+    public ThrowableItem (string name) : base(name)
     {
         
 

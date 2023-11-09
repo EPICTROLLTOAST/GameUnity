@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 public class BaseItem
 {
 
-    public string itemID;
+    public int itemID;
     public string itemName;
-    public BaseItem (string id, string name)
+    public BaseItem (string name)
     {
-        itemID = id;
+        itemID = -999;
         itemName = name;
     }
 
@@ -20,5 +22,9 @@ public class BaseItem
     public virtual void rightClickAction()
     {
         Debug.Log("RIGHT CLICK" + ' '  + itemID + ' ' + itemName);
+    }
+
+    public void register(){
+        ItemRegistry.Instance.addListItem(this);
     }
 }
