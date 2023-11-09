@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeapon: UsableItem //weapons that can attack 
+public class RangedWeapon: UsableItem//weapons that can attack 
 {
-    public GameObject projectile;
-    [SerializeField]
+    ArrowHandler arrowHandller;
+
     //constructor
     public RangedWeapon (string name) : base(name)
     {
@@ -15,7 +15,7 @@ public class RangedWeapon: UsableItem //weapons that can attack
     
     public override void leftClickAction()
     {
-        //Instantiate(projectile);
+        arrowHandller.spawnProjectile();
         Debug.Log("FIRE ARROW");
     }
 

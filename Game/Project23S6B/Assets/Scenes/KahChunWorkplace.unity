@@ -1489,7 +1489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1491184524}
-  - component: {fileID: 1491184523}
+  - component: {fileID: 1491184525}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -1497,22 +1497,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1491184523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491184522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54507cb9d3b4cd249a49c69b19ef22a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
-  cooldownSeconds: 0
-  projectile: {fileID: 4723918660828574226, guid: e715383a823e26542ac226edbd86a186, type: 3}
 --- !u!4 &1491184524
 Transform:
   m_ObjectHideFlags: 0
@@ -1528,6 +1512,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491184525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491184522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7328363efe611284db3f113f7ac420f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  projectile: {fileID: 4723918660828574226, guid: e715383a823e26542ac226edbd86a186, type: 3}
+  enemyTag: Player
 --- !u!1 &1673326741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,7 +1671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 0
-  itemName: triangle1
+  itemName: bow1
 --- !u!1 &1733598103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,7 +2256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemID: 1
-  itemName: triangle2
+  itemName: bow2
 --- !u!212 &2022973625
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseItem
 {
-
+    GameObject player = GameObject.FindWithTag("Player");
     public int itemID;
     public string itemName;
     public BaseItem (string name)

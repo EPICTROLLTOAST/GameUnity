@@ -18,7 +18,7 @@ public class ItemController : MonoBehaviour
         
         //FOR TESTING
         //TODO: Figure out how to store/generate items
-        item = new RangedWeapon("triangle"); 
+        item = new RangedWeapon("bow"); 
     }
 
     // Update is called once per frame
