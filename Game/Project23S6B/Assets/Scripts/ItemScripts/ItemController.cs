@@ -15,7 +15,10 @@ public class ItemController : MonoBehaviour
     void Start()
     {
         playerControllerScript = player.GetComponent<BasePlayerController>();
-        item = new UsableItem("triangle"); //for testing 
+        
+        //FOR TESTING
+        //TODO: Figure out how to store/generate items
+        item = new RangedWeapon("triangle"); 
     }
 
     // Update is called once per frame

@@ -36,7 +36,6 @@ public class BasePlayerController : MonoBehaviour
             new DamageEvent(5f, damageTypes.FIRE, player, player);
         }
 
-
     }
     public void playerMovementKeyCheck()
     {

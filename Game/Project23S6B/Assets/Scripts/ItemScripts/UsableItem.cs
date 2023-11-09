@@ -12,7 +12,5 @@ public class UsableItem: BaseItem //weapons that can attack
         
 
     }
-    
-
 
 }
