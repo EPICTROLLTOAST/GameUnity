@@ -11,14 +11,11 @@ public class ItemInteractScript : BaseInteractScript
 
     [SerializeField] string itemID;
     [SerializeField] string itemName;
-
-
-
     public override void Start()
     {
         base.Start();
         playerControllerScript = getPlayerGameObject().GetComponent<BasePlayerController>();
-        item = new UsableItem(itemName); //for testing 
+        item = new RangedWeapon(itemName); //for testing 
     }
 
     void Update()

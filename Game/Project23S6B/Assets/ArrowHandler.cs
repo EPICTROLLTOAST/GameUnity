@@ -7,12 +7,19 @@ public class ArrowHandler : MonoBehaviour
 {
 
     public float damage = 3f;
+    [SerializeField]
+    GameObject projectile;
+    
     GameObject originEnemy;
     [SerializeField]
     String enemyTag = "Player";
 
     public void setOriginEnemy(GameObject gameObjectR){
         originEnemy = gameObjectR;
+    }
+
+    public void spawnProjectile(){
+        Instantiate(projectile);
     }
 
     void OnTriggerEnter2D(Collider2D other)

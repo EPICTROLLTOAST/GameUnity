@@ -13,4 +13,10 @@ public class UsableItem: BaseItem //weapons that can attack
 
     }
 
+    public override void leftClickAction()
+    {
+        base.leftClickAction();
+        Debug.Log("USABLE ITEM");
+    }
+
 }
