@@ -65,7 +65,7 @@ public class EnemyMovementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Kid");
+        player = GameObject.FindWithTag("Player");
         pathfinder = GetComponent<AIPath>();
         destinationSetter = GetComponent<AIDestinationSetter>();
         StartCoroutine(switchModes());
@@ -271,6 +271,10 @@ public class EnemyMovementManager : MonoBehaviour
         }
         
         return false;
+    }
+
+    public bool hasLOSToPlayer(Vector2 pos){
+        return hasLOS(pos, player);
     }
 
 
