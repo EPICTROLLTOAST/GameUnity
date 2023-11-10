@@ -13,16 +13,14 @@ public class RotateAroundPivot : MonoBehaviour
     void Start()
     {
 
-        StartCoroutine("changeAngle");
     }
+    
 
-    IEnumerator changeAngle(){
-        while (true){
-            gameObject.transform.RotateAround(anchor.transform.position, new Vector3(0f,0f,1f),angle - lastAngle);
-            lastAngle = angle;
-            print("hello!");
-            yield return new WaitForSeconds(0.1f);
-        }
+
+    void Update()
+    {
+        gameObject.transform.RotateAround(anchor.transform.position, new Vector3(0f,0f,1f),angle - lastAngle);
+        lastAngle = angle;
     }
 
 }
