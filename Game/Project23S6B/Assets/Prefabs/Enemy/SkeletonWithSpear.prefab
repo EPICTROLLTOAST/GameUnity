@@ -257,6 +257,7 @@ MonoBehaviour:
   movementLockFlag: 0
   maxHealth: 5
   health: 0
+  orientation: 1
   movementManager: {fileID: 2657712799330626038}
   attackDistance: 1.5
   playerPresence: 0
@@ -266,7 +267,7 @@ MonoBehaviour:
   cooldownTime: 0.8
   inAttack: 0
   attackType: 1
-  arm: {fileID: 0}
+  arm: {fileID: 4439900765348324069}
   finalRetractAngle: 45
   finalSwipeAngle: -45
   distanceRetract: -0.15
@@ -274,7 +275,7 @@ MonoBehaviour:
   distanceAtStart: 0
   damageToDeal: 2
   currAnimationState: 3
-  pivot: {fileID: 0}
+  pivot: {fileID: 8739467082387336825}
 --- !u!1 &4439900765348324069
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162c57c6f977b9349a66f51613e71b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mlc: {fileID: 0}
 --- !u!61 &3716674075537717345
 BoxCollider2D:
   m_ObjectHideFlags: 0

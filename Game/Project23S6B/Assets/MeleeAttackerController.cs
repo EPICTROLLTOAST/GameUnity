@@ -72,14 +72,8 @@ public class MeleeAttackerController : EnemyController
     {
         base.Start();
         this.movementManager.mode = EnemyMovementManager.movementModes.wanderingWithRadius;
-        foreach(Transform armR in gameObject.transform){
-            arm = armR.gameObject;
-        }
         distanceAtStart = arm.transform.localPosition.x;
         heightAtStart = arm.transform.localPosition.y;
-        foreach(Transform pivotR in arm.transform){
-            pivot = pivotR.gameObject;
-        }
     }
 
     void attackPlayer(){
@@ -103,9 +97,11 @@ public class MeleeAttackerController : EnemyController
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        
+        base.Update();
+
+
         if(!playerPresence){
             playerPresence = checkPlayerPresence();
         }else{
@@ -130,22 +126,22 @@ public class MeleeAttackerController : EnemyController
         if(currAnimationState == AnimationState.winding_up_attack){
             timerSinceAnimStateChange += Time.deltaTime;
             if(timerSinceAnimStateChange >= timeToSpawnAttack){
-                arm.GetComponent<RotateAroundPivot>().angle = finalRetractAngle;
+                arm.GetComponent<RotateAroundPivot>().angle = finalRetractAngle * (orientation == lookDirection.right?1:-1);
                 currAnimationState = AnimationState.delivering_attack;
                 timerSinceAnimStateChange = 0f;
             }else{
-                arm.GetComponent<RotateAroundPivot>().angle = finalRetractAngle/timeToSpawnAttack * timerSinceAnimStateChange;
+                arm.GetComponent<RotateAroundPivot>().angle = finalRetractAngle/timeToSpawnAttack * timerSinceAnimStateChange * (orientation == lookDirection.right?1:-1);
             }
             
         }else if (currAnimationState == AnimationState.delivering_attack){
             timerSinceAnimStateChange += Time.deltaTime;
             if(timerSinceAnimStateChange >= timeForFollowUp){
-                arm.GetComponent<RotateAroundPivot>().angle = finalSwipeAngle;
+                arm.GetComponent<RotateAroundPivot>().angle = finalSwipeAngle * (orientation == lookDirection.right?1:-1);
                 currAnimationState = AnimationState.return_to_normal;
                 timerSinceAnimStateChange = 0f;
                 canDealDamage = true;
             }else{
-                arm.GetComponent<RotateAroundPivot>().angle = finalRetractAngle - (finalRetractAngle - finalSwipeAngle)/timeForFollowUp * timerSinceAnimStateChange;
+                arm.GetComponent<RotateAroundPivot>().angle = (finalRetractAngle - (finalRetractAngle - finalSwipeAngle)/timeForFollowUp * timerSinceAnimStateChange) * (orientation == lookDirection.right?1:-1);
             }
         }else if(currAnimationState == AnimationState.return_to_normal){
             timerSinceAnimStateChange += Time.deltaTime;
@@ -154,7 +150,7 @@ public class MeleeAttackerController : EnemyController
                 currAnimationState = AnimationState.not_handling;
                 timerSinceAnimStateChange = 0f;
             }else{
-                arm.GetComponent<RotateAroundPivot>().angle = finalSwipeAngle - finalSwipeAngle/cooldownTime * timerSinceAnimStateChange;
+                arm.GetComponent<RotateAroundPivot>().angle = (finalSwipeAngle - finalSwipeAngle/cooldownTime * timerSinceAnimStateChange) * (orientation == lookDirection.right?1:-1);
             }
         }
     }
@@ -229,6 +225,17 @@ public class MeleeAttackerController : EnemyController
                 new DamageEvent(damageToDeal, damageTypes.BLUNT, gameObject, thingHit);
                 canDealDamage = false;
             }
+        }
+
+    }
+
+    public override void orientationChange(lookDirection direction)
+    {
+        
+        if(direction == lookDirection.left){
+            gameObject.transform.Rotate(new Vector3(0f, 0f, 180f));
+        }else{
+            gameObject.transform.Rotate(new Vector3(0f,0f, -180f));
         }
 
     }

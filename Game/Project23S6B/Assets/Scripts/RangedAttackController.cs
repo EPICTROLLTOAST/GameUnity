@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class RangedAttackController : EnemyController
@@ -33,6 +35,13 @@ public class RangedAttackController : EnemyController
     GameObject arrow;
     [SerializeField]
     float speed;
+    [SerializeField]
+    GameObject bow;
+    [SerializeField]
+    GameObject pivot;
+    SpriteRenderer spriteRenderer;
+
+
     bool canAttack = true;
 
     // Start is called before the first frame update
@@ -45,7 +54,8 @@ public class RangedAttackController : EnemyController
             //Assuming there's only one child
             ArrowOrigin = transform.gameObject;
         }
-        
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        updateOrientation();
     }
 
     void attackPlayer(){
@@ -60,9 +70,10 @@ public class RangedAttackController : EnemyController
         return false;
     }
 
-    void Update()
-    {
-        
+    public override void Update()
+    {   
+        base.Update();
+
         if(!playerPresence){
             playerPresence = checkPlayerPresence();
         }else{
@@ -84,8 +95,11 @@ public class RangedAttackController : EnemyController
                 if(timerSinceAnimStateChange >= timeToSpawnAttack){
                     currAnimationState = AnimationState.delivering_attack;
                     timerSinceAnimStateChange = 0f;
+                }else{
+                    Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
+                    float angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
+                    bow.GetComponent<RotateAroundPivot>().angle = angle;
                 }
-
             }
             else if (currAnimationState == AnimationState.delivering_attack){
                 timerSinceAnimStateChange += Time.deltaTime;
@@ -111,17 +125,31 @@ public class RangedAttackController : EnemyController
 
             }
 
-            if(currAnimationState != AnimationState.not_handling){
-                //TODO point the bow in the player's direction
+            if(currAnimationState == AnimationState.not_handling){
+                Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
+                float angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
+                bow.GetComponent<RotateAroundPivot>().angle = angle;
             }
 
 
         }
     }
 
-
     IEnumerator cooldownTimer(){
         yield return new WaitForSeconds(cooldownTime);
         canAttack = true;
     }
+
+    public override void orientationChange(lookDirection direction)
+    {
+        
+        if(direction == lookDirection.left){
+            gameObject.transform.Rotate(new Vector3(0f, 0f, 180f));
+        }else{
+            gameObject.transform.Rotate(new Vector3(0f,0f, -180f));
+        }
+
+    }
+
+
 }

@@ -37,6 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1459716680036264166}
+  - {fileID: 4526692933822048549}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6930803254235963536
@@ -257,6 +258,7 @@ MonoBehaviour:
   movementLockFlag: 0
   maxHealth: 5
   health: 0
+  orientation: 1
   movementManager: {fileID: 0}
   attackDistance: 1.5
   playerPresence: 0
@@ -266,11 +268,15 @@ MonoBehaviour:
   cooldownTime: 0.8
   inAttack: 0
   attackType: 0
-  arm: {fileID: 0}
+  arm: {fileID: 3991971921334524005}
   finalRetractAngle: 45
   finalSwipeAngle: -45
+  distanceRetract: -2
+  distanceThrust: 5
+  distanceAtStart: 0
   damageToDeal: 2
   currAnimationState: 2
+  pivot: {fileID: 3837646042784363463}
 --- !u!1 &3837646042784363463
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,12 +301,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3837646042784363463}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.324, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19657648, y: 0.03999996, z: 0}
+  m_LocalScale: {x: 1.1371096, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1459716680036264166}
+  m_Father: {fileID: 2509894523307079920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3991971921334524005
 GameObject:
@@ -334,8 +340,7 @@ Transform:
   m_LocalPosition: {x: 0.565, y: 0.04, z: 0}
   m_LocalScale: {x: 1.1371096, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4526692933822048549}
+  m_Children: []
   m_Father: {fileID: 2509894523307079920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3427183018417061928
@@ -403,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angle: 0
+  anchor: {fileID: 3837646042784363463}
 --- !u!114 &5214320813897200964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162c57c6f977b9349a66f51613e71b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mlc: {fileID: 0}
 --- !u!61 &2763844322655235351
 BoxCollider2D:
   m_ObjectHideFlags: 0

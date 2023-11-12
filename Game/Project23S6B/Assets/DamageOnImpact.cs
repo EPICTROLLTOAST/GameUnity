@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class DamageOnImpact : MonoBehaviour
 {
+    [SerializeField]
     MeleeAttackerController mlc;
 
     void Start()
     {
-        mlc = gameObject.transform.parent.GetComponent<MeleeAttackerController>();
+        mlc = gameObject.transform.parent.gameObject.GetComponent<MeleeAttackerController>();
     }
 
 
     void OnTriggerStay2D(Collider2D other)
     {
-        mlc.dealDamage(other.gameObject);
+        try{
+            mlc.dealDamage(other.gameObject);
+        }catch{
+            
+        }
+        
     }
 
 

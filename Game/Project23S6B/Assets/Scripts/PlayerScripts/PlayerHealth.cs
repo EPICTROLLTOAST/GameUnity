@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
 
     [SerializeField]
-    float maxHealth = 10f;
+    public float maxHealth = 10f;
     [SerializeField]
     float health;
 
@@ -37,6 +37,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void die()
     {
 
+    }
+
+    public float getHealth(){
+        return health;
     }
 
 }
