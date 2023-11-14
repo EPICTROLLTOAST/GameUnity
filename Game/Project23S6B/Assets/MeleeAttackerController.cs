@@ -47,6 +47,7 @@ public class MeleeAttackerController : EnemyController
     float distanceThrust = 5f;
     [SerializeField]
     float distanceAtStart = 0f;
+    float heightAtStart = 0f;
 
     [SerializeField]
     float damageToDeal = 2f;
@@ -64,7 +65,6 @@ public class MeleeAttackerController : EnemyController
     float timerSinceAnimStateChange = 0f;
     [SerializeField]
     GameObject pivot;
-    float heightAtStart;
 
 
     // Start is called before the first frame update
@@ -158,16 +158,17 @@ public class MeleeAttackerController : EnemyController
     //! Also all this code is stupid and dumb
     //! I am very stupid
     void thrustAnimationHandler(){
-
+        
+        Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
+        float angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
         if(currAnimationState == AnimationState.winding_up_attack){
-            canDealDamage = false;
-            Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
-            float angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
-
             timerSinceAnimStateChange += Time.deltaTime;
+            canDealDamage = false;
             if(timerSinceAnimStateChange >= timeToSpawnAttack){
-                
-                arm.transform.localPosition = new Vector2(distanceAtStart + distanceRetract, arm.transform.localPosition.y);
+                Vector2 dirAngle = (new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)))).normalized;
+                dirAngle = dirAngle * distanceRetract;
+
+                arm.transform.localPosition = new Vector2(distanceAtStart + dirAngle.x, heightAtStart + dirAngle.y);
                 arm.GetComponent<RotateAroundPivot>().angle = angle;
                 
 
@@ -175,23 +176,29 @@ public class MeleeAttackerController : EnemyController
                 timerSinceAnimStateChange = 0f;
                 canDealDamage = true;
             }else{
-                arm.GetComponent<RotateAroundPivot>().angle = angle/timeToSpawnAttack * timerSinceAnimStateChange;
-                Vector2 dirAngle = new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)));
-                arm.transform.localPosition = dirAngle.normalized * (distanceRetract * timerSinceAnimStateChange / timeToSpawnAttack);
-                arm.transform.localPosition = new Vector2(distanceAtStart + arm.transform.localPosition.x, arm.transform.localPosition.y);
+                
+                arm.GetComponent<RotateAroundPivot>().angle = angle;
+                Vector2 dirAngle = (new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)))).normalized;
+                dirAngle = dirAngle * (distanceRetract * timerSinceAnimStateChange / timeToSpawnAttack);
+                arm.transform.localPosition = new Vector2(distanceAtStart + dirAngle.x, heightAtStart + dirAngle.y);
             }
             
         }else if (currAnimationState == AnimationState.delivering_attack){
             timerSinceAnimStateChange += Time.deltaTime;
             if(timerSinceAnimStateChange >= timeForFollowUp){
-                arm.transform.localPosition = new Vector2(distanceAtStart + distanceThrust , arm.transform.localPosition.y);
+                Vector2 dirAngle = (new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)))).normalized;
+                dirAngle = dirAngle * distanceThrust;
+
+                arm.transform.localPosition = new Vector2(distanceAtStart + dirAngle.x, heightAtStart + dirAngle.y);
                 currAnimationState = AnimationState.return_to_normal;
                 timerSinceAnimStateChange = 0f;
                 canDealDamage = false;
             }else{
-                Vector2 dirAngle = new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle * (float)(Math.PI / 180f)));
-                arm.transform.localPosition = dirAngle.normalized * (distanceThrust * timerSinceAnimStateChange / timeForFollowUp);
-                arm.transform.localPosition = new Vector2(distanceAtStart + arm.transform.localPosition.x, arm.transform.localPosition.y);
+                arm.GetComponent<RotateAroundPivot>().angle = angle;
+                Vector2 dirAngle = (new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)))).normalized;
+                dirAngle = dirAngle * (distanceThrust * timerSinceAnimStateChange / timeForFollowUp);
+                arm.transform.localPosition = new Vector2(distanceAtStart + dirAngle.x, heightAtStart + dirAngle.y);
+
             }
         }else if(currAnimationState == AnimationState.return_to_normal){
             timerSinceAnimStateChange += Time.deltaTime;
@@ -200,14 +207,14 @@ public class MeleeAttackerController : EnemyController
                 currAnimationState = AnimationState.not_handling;
                 timerSinceAnimStateChange = 0f;
             }else{
-                //Shut up fucking vscode code suggestion "Oh you don't need the brackets!" STFU it makes the code easier to read!!!
-                Vector2 dirAngle = new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle * (float)(Math.PI / 180f)));
-                arm.transform.localPosition = dirAngle.normalized * (distanceThrust - distanceThrust * timerSinceAnimStateChange / cooldownTime);
-                arm.transform.localPosition = new Vector2(distanceAtStart + arm.transform.localPosition.x, arm.transform.localPosition.y);
+                arm.GetComponent<RotateAroundPivot>().angle = angle;
+                Vector2 dirAngle = (new Vector2(1f, (float)Math.Tan(arm.GetComponent<RotateAroundPivot>().angle* (float)(Math.PI / 180f)))).normalized;
+                dirAngle = dirAngle * (distanceThrust - distanceThrust * timerSinceAnimStateChange / cooldownTime);
+                arm.transform.localPosition = new Vector2(distanceAtStart + dirAngle.x, heightAtStart + dirAngle.y);
             }
         }else{
-            Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
-            float angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
+            dir = (player.transform.position - pivot.transform.position).normalized;
+            angle = (float)Math.Atan(dir.y/dir.x) * (float)(180/ Math.PI);
             arm.GetComponent<RotateAroundPivot>().angle = angle;
         }
     }

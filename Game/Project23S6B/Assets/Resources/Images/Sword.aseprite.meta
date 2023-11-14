@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f288d6c0877a5f44bc9c9a804ddf931
+guid: d481e545bf8d5d248a68a07903b13f6a
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: catgirl1
+  - name: Sword
     originalName: 
-    pivot: {x: 0.52380955, y: 0.030303031}
+    pivot: {x: 0.64705884, y: -0.2857143}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 63
-      height: 66
-    spriteID: dcbfe77aa3e882b4991de98f84e556b0
+      width: 17
+      height: 42
+    spriteID: 248186045c58ca74fa6158ff011a4ea2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,20 +142,20 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1031441035
-    name: catgirl1
+    guid: -31456551
+    name: Sword
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: catgirl1
+    - name: Sword
       frameIndex: 0
       cellRect:
-        x: -1
-        y: -2
-        width: 63
-        height: 66
-      spriteId: dcbfe77aa3e882b4991de98f84e556b0
+        x: 21
+        y: 12
+        width: 17
+        height: 42
+      spriteId: 248186045c58ca74fa6158ff011a4ea2
     linkedCells: []
     parentIndex: -1
   platformSettings: []
