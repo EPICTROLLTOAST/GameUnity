@@ -91,6 +91,13 @@ public class BowHandler : MonoBehaviour
         Vector2 manToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
         float angleToMouse = (float) (Math.Atan(manToMouse.y/manToMouse.x) * 180/Math.PI);
 
+        if(manToMouse.x >= 0){
+            player.transform.Rotate(new Vector3(0f, player.transform.eulerAngles.y == 180f? -180:0f, 0f)); 
+        
+        }else{
+            player.transform.Rotate(new Vector3(0f, player.transform.eulerAngles.y == 180f? 0:180f, 0f));
+        }
+
 
         currAngleOffset += angleToMouse;
         arm.GetComponent<RotateAroundPivot>().angle = currAngleOffset;

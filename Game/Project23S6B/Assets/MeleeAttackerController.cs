@@ -240,9 +240,9 @@ public class MeleeAttackerController : EnemyController
     {
         
         if(direction == lookDirection.left){
-            gameObject.transform.Rotate(new Vector3(0f, 0f, 180f));
+            gameObject.transform.Rotate(new Vector3(0f, 180f, 0f));
         }else{
-            gameObject.transform.Rotate(new Vector3(0f,0f, -180f));
+            gameObject.transform.Rotate(new Vector3(0f,-180f, 0f));
         }
 
     }
