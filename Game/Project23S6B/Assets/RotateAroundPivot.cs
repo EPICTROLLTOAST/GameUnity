@@ -15,9 +15,12 @@ public class RotateAroundPivot : MonoBehaviour
 
     }
     
+    public void resetAngle(){
+        gameObject.transform.RotateAround(anchor.transform.position, new Vector3(0f,0f,1f),0f - lastAngle);
+        lastAngle = 0f;
+    }
 
-
-    void Update()
+    void LateUpdate()
     {
         gameObject.transform.RotateAround(anchor.transform.position, new Vector3(0f,0f,1f),angle - lastAngle);
         lastAngle = angle;
