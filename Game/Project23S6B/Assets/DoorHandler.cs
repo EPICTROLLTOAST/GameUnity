@@ -37,7 +37,7 @@ public class DoorHandler : MonoBehaviour
             if(stopWatch > timeTaken){
                 DoorTurning = false;
                 toggle = 0f - toggle;
-                currentAngles = Math.Abs(90 - currentAngles);
+                currentAngles = Math.Abs(maxAngle - currentAngles);
                 gameObject.GetComponent<RotateAroundPivot>().angle = currentAngles;                
             }
         }else if(distFromPlayer <= maxDistanceFromDoor && Input.GetKeyDown(KeyCode.E)){
