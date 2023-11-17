@@ -31,6 +31,10 @@ public class ArrowHandler : MonoBehaviour
             Destroy(gameObject);
         }else if(other.tag == "Structure"){
             breakArrow();
+        }else if (other.GetComponent<BarrelManager>() != null){
+            
+            other.GetComponent<BarrelManager>().explode();
+            Destroy(gameObject);
         }
     }
 
