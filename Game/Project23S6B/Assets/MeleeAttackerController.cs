@@ -162,7 +162,7 @@ public class MeleeAttackerController : EnemyController
     //! Also all this code is stupid and dumb
     //! I am very stupid
     void thrustAnimationHandler(){
-        Vector2 dir = (player.transform.position - pivot.transform.position).normalized;
+        Vector2 dir = (player.transform.position - gameObject.transform.position).normalized;
         float directAngle = (float)Math.Atan(dir.y/Math.Abs(dir.x)) * (float)(180/ Math.PI);
         if(currAnimationState == AnimationState.winding_up_attack){
             timerSinceAnimStateChange += Time.deltaTime;

@@ -8,7 +8,7 @@ public class RotateAroundPivot : MonoBehaviour
     public float angle = 0f;
     float lastAngle = 0f;
     [SerializeField]
-    GameObject anchor;
+    public GameObject anchor;
 
     void Start()
     {

@@ -40,17 +40,26 @@ public class BowHandler : MonoBehaviour
     AnimationState currAnimationState = AnimationState.not_handling;
     float timerSinceAnimStateChange = 0f;
     GameObject player;
+    bool lookingRight = true;
+    RotateAroundPivot RAP;
+    [SerializeField]
+    Vector2 mouseWorldPoint;
 
     void Start()
     {
         arm = gameObject;
         player = GameObject.FindGameObjectWithTag("Player");    
+        RAP = arm.GetComponent<RotateAroundPivot>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
+        mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+
         currAngleOffset = 0f;
         if(currAnimationState == AnimationState.not_handling && Input.GetMouseButton(0)){
             currAnimationState = AnimationState.winding_up_attack;
@@ -62,7 +71,7 @@ public class BowHandler : MonoBehaviour
 
                 GameObject arrowChild = Instantiate(arrow);
                 arrowChild.transform.position = gameObject.transform.position;
-                arrowChild.GetComponent<Rigidbody2D>().velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position).normalized * speed;
+                arrowChild.GetComponent<Rigidbody2D>().velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - RAP.anchor.transform.position).normalized * speed;
 
                 currAnimationState = AnimationState.delivering_attack;
                 timerSinceAnimStateChange = 0f;
@@ -88,11 +97,40 @@ public class BowHandler : MonoBehaviour
                 
             }
         }
-        Vector2 manToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
-        float angleToMouse = (float) (Math.Atan(manToMouse.y/manToMouse.x) * 180/Math.PI);
+        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position).normalized;
+        float angle = (float)Math.Atan(dir.y/Math.Abs(dir.x)) * (float)(180/ Math.PI);
+        if(dir.y >= 0){
+            angle = (float)Math.Atan(dir.y/Math.Abs(dir.x)) * (float)(180f/ Math.PI);
+        }else{
+            angle = ((float)Math.Atan(dir.y/Math.Abs(dir.x)) * (float)(180f/ Math.PI));
+        }
+
+        if(dir.x < 0){
+            angle = -angle;
+        }
+
+        arm.GetComponent<RotateAroundPivot>().angle = angle;
 
 
-        currAngleOffset += angleToMouse;
-        arm.GetComponent<RotateAroundPivot>().angle = currAngleOffset;
+        if(Camera.main.ScreenToWorldPoint(Input.mousePosition).x < player.transform.position.x){
+            if(lookingRight){
+                lookingRight = false;
+                float angleR = RAP.angle;
+                RAP.resetAngle();
+
+                player.transform.Rotate(0f,180f,0f);
+                RAP.angle = angleR;
+            }
+        }else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).x > player.transform.position.x){
+            if(!lookingRight){
+                lookingRight = true;
+                float angleR = RAP.angle;
+                RAP.resetAngle();
+
+                player.transform.Rotate(0f, -180f, 0f);
+                RAP.angle = angleR;
+            }  
+        }
+
     }
 }
