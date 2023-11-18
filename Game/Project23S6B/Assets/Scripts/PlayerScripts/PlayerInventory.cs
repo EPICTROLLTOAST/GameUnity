@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerInventory
+public class PlayerInventory: MonoBehaviour
 {
+    public static PlayerInventory Instance;
     public ArrayList inventory = new ArrayList();
+
+    public Transform InventoryContent;
+    public GameObject InventoryItem;
 
     public int heldItemIndex = -1; //index of item held in hand, -1 if none
     private BaseItem heldItem = null;
 
-    public PlayerInventory(){
-        ArrayList inventory = new ArrayList();
+    private void Awake() {
+        Instance = this;
     }
 
     public void addToInventory(BaseItem item) //adds item to player inventory
@@ -34,6 +38,12 @@ public class PlayerInventory
         //code to remove item from inventory
         inventory.Remove(item);
     }
+
+    public void displayInventory(){
+        //opens inventory ui
+
+    }
+
 
     public void displayInventoryToConsole()
     {

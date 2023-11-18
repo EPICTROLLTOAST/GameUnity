@@ -14,8 +14,6 @@ public class BasePlayerController : MonoBehaviour
     float walkingSpeed = 7.5f;
     float runningSpeed = 15f;
 
-    PlayerInventory playerInventory = new PlayerInventory();
-
     // Start is called before the first frame update
     void Start()
     {
@@ -89,10 +87,10 @@ public class BasePlayerController : MonoBehaviour
         //mouse actions
         if (Input.GetMouseButtonDown(0))
         {
-            BaseItem item = playerInventory.getHeldItem();
+            BaseItem item = PlayerInventory.Instance.getHeldItem();
             if (item != null)
             {
-                playerInventory.getHeldItem().leftClickAction();
+                PlayerInventory.Instance.getHeldItem().leftClickAction();
             }
             else
             {
@@ -101,10 +99,10 @@ public class BasePlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            BaseItem item = playerInventory.getHeldItem();
+            BaseItem item = PlayerInventory.Instance.getHeldItem();
             if (item != null)
             {
-                playerInventory.getHeldItem().rightClickAction();
+                PlayerInventory.Instance.getHeldItem().rightClickAction();
             }
             else
             {
@@ -115,7 +113,7 @@ public class BasePlayerController : MonoBehaviour
 
     public void pickUpItem(BaseItem item)
     {
-        playerInventory.addToInventory(item);
-        playerInventory.displayInventoryToConsole();
+        PlayerInventory.Instance.addToInventory(item);
+        PlayerInventory.Instance.displayInventoryToConsole();
     }
 }

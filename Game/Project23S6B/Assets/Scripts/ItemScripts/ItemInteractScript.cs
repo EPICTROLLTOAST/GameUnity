@@ -15,7 +15,7 @@ public class ItemInteractScript : BaseInteractScript
     {
         base.Start();
         playerControllerScript = getPlayerGameObject().GetComponent<BasePlayerController>();
-        item = new RangedWeapon(itemName); //for testing 
+        item = new BaseItem(itemName); //for testing 
     }
 
     void Update()
