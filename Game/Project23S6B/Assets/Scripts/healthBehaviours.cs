@@ -16,11 +16,23 @@ public enum damageTypes
 }
 public class DamageEvent
 {
-    public float damageAmount;
+    public float damageAmount = 1f;
     public damageTypes damageType;
     public GameObject attacker;
     public GameObject target;
+    public float knockbackValue = 1f;
     
+
+    public DamageEvent(float damageAmount, damageTypes damageType, GameObject attacker, GameObject target, float knockbackValue)
+    {
+        this.damageAmount = damageAmount;
+        this.damageType = damageType;
+        this.attacker = attacker;
+        this.target = target;
+        this.knockbackValue = knockbackValue;
+        target.GetComponent<IDamageable>().recceiveDamage(this);
+    }
+
     public DamageEvent(float damageAmount, damageTypes damageType, GameObject attacker, GameObject target)
     {
         this.damageAmount = damageAmount;
@@ -28,8 +40,8 @@ public class DamageEvent
         this.attacker = attacker;
         this.target = target;
         target.GetComponent<IDamageable>().recceiveDamage(this);
-        
     }
+    
 
 
 }

@@ -145,7 +145,7 @@ public class RangedAttackController : EnemyController
         
         if(direction == lookDirection.left){
             gameObject.transform.Rotate(new Vector3(0f, 0f, 180f));
-        }else{
+        }else{ 
             gameObject.transform.Rotate(new Vector3(0f,0f, -180f));
         }
 
