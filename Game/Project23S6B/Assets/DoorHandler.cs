@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,11 +10,16 @@ public class DoorHandler : MonoBehaviour
 {
     [SerializeField]
     GameObject hinge;
-    public float maxAngle = 90f;
+    [SerializeField]
+    float maxAngle = 90f;
     public float timeTaken = 2f;
-    public Vector3 currentEulerAngles;
     public bool DoorTurning = false;
-    public float toggle = 1f;
+    float toggle = 1f;
+
+    [SerializeField]
+    float maxDistanceFromDoor = 3f;
+    float stopWatch = 0;
+    float currentAngles = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,23 +27,23 @@ public class DoorHandler : MonoBehaviour
     }
 
     // Update is called once per frame
-    float stopWatch = 0;
     void Update()
     {
         stopWatch += Time.deltaTime;
-        float maxDistanceFromDoor = 3f;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         float distFromPlayer = (player.transform.position - gameObject.transform.position).magnitude;
         if(DoorTurning){
-            gameObject.GetComponent<RotateAroundPivot>().angle = maxAngle * (stopWatch / timeTaken) * toggle;
+            gameObject.GetComponent<RotateAroundPivot>().angle = currentAngles + maxAngle * (stopWatch / timeTaken) * toggle;
             if(stopWatch > timeTaken){
                 DoorTurning = false;
                 toggle = 0f - toggle;
+                currentAngles = Math.Abs(maxAngle - currentAngles);
+                gameObject.GetComponent<RotateAroundPivot>().angle = currentAngles;                
             }
         }else if(distFromPlayer <= maxDistanceFromDoor && Input.GetKeyDown(KeyCode.E)){
             stopWatch = 0; 
             DoorTurning = true;
-            currentEulerAngles = gameObject.transform.eulerAngles;
+            currentAngles = gameObject.GetComponent<RotateAroundPivot>().angle;
         }
     }
 }
