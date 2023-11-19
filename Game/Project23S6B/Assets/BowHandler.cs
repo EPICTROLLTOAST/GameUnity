@@ -72,6 +72,10 @@ public class BowHandler : MonoBehaviour
                 GameObject arrowChild = Instantiate(arrow);
                 arrowChild.transform.position = gameObject.transform.position;
                 arrowChild.GetComponent<Rigidbody2D>().velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - RAP.anchor.transform.position).normalized * speed;
+                print(RangedAttackController.getAngleBetweenPoints(Camera.main.ScreenToWorldPoint(Input.mousePosition), RAP.anchor.transform.position));
+                arrowChild.transform.Rotate(new Vector3(0f, 0f, RangedAttackController.getAngleBetweenPoints(RAP.anchor.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)) - 90f));
+                
+
 
                 currAnimationState = AnimationState.delivering_attack;
                 timerSinceAnimStateChange = 0f;

@@ -117,7 +117,9 @@ public class RangedAttackController : EnemyController
                     Rigidbody2D rb = arrowClone.GetComponent<Rigidbody2D>();
                     Vector2 dir = (player.transform.position - ArrowOrigin.transform.position).normalized;
                     rb.velocity = dir * speed;
-
+                    //Assuming arrow is initially pointing up
+                    arrowClone.transform.Rotate(new Vector3(0f, 0f, getAngleBetweenPoints(ArrowOrigin.transform.position, player.transform.position) - 90f));
+                    
                     currAnimationState = AnimationState.not_handling;
                     timerSinceAnimStateChange = 0f;
                     StartCoroutine("cooldownTimer");
@@ -139,6 +141,30 @@ public class RangedAttackController : EnemyController
         yield return new WaitForSeconds(cooldownTime);
         canAttack = true;
     }
+
+    public static float getAngleBetweenPoints(Vector2 pos1, Vector2 pos2){
+        Vector2 dir = pos2 - pos1;
+        float alpha = (float) Math.Atan(Math.Abs(dir.y)/Math.Abs(dir.x)) * (float)(180/Math.PI);
+        if(dir.x > 0){
+            if(dir.y > 0){
+                //1st quadrant
+                return alpha;
+            }else{
+                //4th quadrant
+                return 360f - alpha;
+            }
+        }else{
+            if(dir.y > 0){
+                //2nd quadrant
+                return 180f - alpha;
+            }else{
+                //3rd quadrant
+                return 180f + alpha;
+            }
+        }
+
+    }
+
 
     public override void orientationChange(lookDirection direction)
     {
