@@ -44,12 +44,14 @@ public class BowHandler : MonoBehaviour
     RotateAroundPivot RAP;
     [SerializeField]
     Vector2 mouseWorldPoint;
+    BasePlayerController BPC;
 
     void Start()
     {
         arm = gameObject;
         player = GameObject.FindGameObjectWithTag("Player");    
         RAP = arm.GetComponent<RotateAroundPivot>();
+        BPC = player.GetComponent<BasePlayerController>();
     }
 
 
@@ -59,9 +61,13 @@ public class BowHandler : MonoBehaviour
 
         mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
+        if(BPC.movementLockFlag){
+            currAnimationState = AnimationState.not_handling;
+            timerSinceAnimStateChange = 0f;
+        }
 
         currAngleOffset = 0f;
-        if(currAnimationState == AnimationState.not_handling && Input.GetMouseButton(0)){
+        if(currAnimationState == AnimationState.not_handling && Input.GetMouseButton(0) && !BPC.movementLockFlag){
             currAnimationState = AnimationState.winding_up_attack;
         }
 

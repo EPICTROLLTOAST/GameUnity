@@ -40,10 +40,13 @@ public class SwordHandler : MonoBehaviour
     float timerSinceAnimStateChange = 0f;
     GameObject player;
 
+    BasePlayerController BPC;
+
     void Start()
     {
         arm = gameObject;
-        player = GameObject.FindGameObjectWithTag("Player");    
+        player = GameObject.FindGameObjectWithTag("Player");  
+        BPC = player.GetComponent<BasePlayerController>();
     }
 
 
@@ -51,7 +54,12 @@ public class SwordHandler : MonoBehaviour
     void Update()
     {
         currAngleOffset = 0f;
-        if(currAnimationState == AnimationState.not_handling && Input.GetMouseButton(0)){
+        if(BPC.movementLockFlag){
+            currAnimationState = AnimationState.not_handling;
+            timerSinceAnimStateChange = 0f;
+        }
+
+        if(currAnimationState == AnimationState.not_handling && Input.GetMouseButton(0) && !BPC.movementLockFlag){
             currAnimationState = AnimationState.winding_up_attack;
         }
 

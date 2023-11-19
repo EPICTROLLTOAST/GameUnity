@@ -27,7 +27,7 @@ public class ArrowHandler : MonoBehaviour
         if (other.tag == enemyTag)
         {
             //? maybe discuss about dealing damage also based on its momentum?
-            new DamageEvent(damage, damageTypes.PIERCING, originEnemy, other.gameObject);
+            new DamageEvent(damage, damageTypes.PIERCING, originEnemy, other.gameObject, 5f, gameObject.GetComponent<Rigidbody2D>().velocity);
             Destroy(gameObject);
         }else if(other.tag == "Structure"){
             breakArrow();

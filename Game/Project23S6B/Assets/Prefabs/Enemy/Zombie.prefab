@@ -269,14 +269,17 @@ MonoBehaviour:
   inAttack: 0
   attackType: 0
   arm: {fileID: 3991971921334524005}
-  finalRetractAngle: 45
-  finalSwipeAngle: -45
+  finalRetractAngle: 80
+  finalSwipeAngle: -75
   distanceRetract: -2
   distanceThrust: 5
   distanceAtStart: 0
+  heightAtStart: 0
   damageToDeal: 2
   currAnimationState: 2
+  timerSinceAnimStateChange: 0
   pivot: {fileID: 3837646042784363463}
+  rotateAroundPivot: {fileID: 0}
 --- !u!1 &3837646042784363463
 GameObject:
   m_ObjectHideFlags: 0

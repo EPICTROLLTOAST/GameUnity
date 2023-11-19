@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BasePlayerController : MonoBehaviour
+public class BasePlayerController : MonoBehaviour, IDamageable
 {
     GameObject player;
     Rigidbody2D rigidbody;
@@ -14,24 +14,61 @@ public class BasePlayerController : MonoBehaviour
     float walkingSpeed = 7.5f;
     float runningSpeed = 15f;
 
+    [SerializeField]
+    public float maxHealth = 10f;
+    [SerializeField]
+    float health;
+    [SerializeField]
+    float knockbackResistance = 1f;
+    public bool movementLockFlag = false;
+    float timeSinceMovementLock = 0f;
+    float timeToWaitForMovementLock = 0f;
+
+    [SerializeField]
+    float maxKnockbackSpeed = 20f;
+    [SerializeField]
+    float minKnockbackSpeed = 2f;
+    [SerializeField]
+    float maxMovementLocktime = 3f;
+    [SerializeField]
+    float minMovementLockTime = 1f;
+    [SerializeField]
+    float flungMultiplier = 2f;
+    [SerializeField]
+    float debugKnockback = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
         player = gameObject;
         rigidbody = player.GetComponent<Rigidbody2D>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerMovementKeyCheck();
+        if(Input.GetKeyDown(KeyCode.R)){
+            new DamageEvent(0f, damageTypes.BLUNT, player, player, debugKnockback, Vector2.left);
+        }
+
+        if(!movementLockFlag){
+            playerMovementKeyCheck();
+        }else{
+            timeSinceMovementLock += Time.deltaTime;
+            if(timeSinceMovementLock >= timeToWaitForMovementLock){
+                movementLockFlag = false;
+                timeSinceMovementLock = 0f;
+                timeToWaitForMovementLock = 0f;
+            }
+        }
+        
         playerMouseCheck();
         
         if (Input.GetKeyDown(KeyCode.R))
         {
             print("Hello!");
             //Just call a new damage event to damage someone
-            new DamageEvent(5f, damageTypes.FIRE, player, player);
         }
 
     }
@@ -85,35 +122,87 @@ public class BasePlayerController : MonoBehaviour
     public void playerMouseCheck()
     {
         //mouse actions
-        if (Input.GetMouseButtonDown(0))
-        {
-            BaseItem item = PlayerInventory.Instance.getHeldItem();
-            if (item != null)
-            {
-                PlayerInventory.Instance.getHeldItem().leftClickAction();
-            }
-            else
-            {
-                print("NO ITEM HELD");
-            }
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            BaseItem item = PlayerInventory.Instance.getHeldItem();
-            if (item != null)
-            {
-                PlayerInventory.Instance.getHeldItem().rightClickAction();
-            }
-            else
-            {
-                print("NO ITEM HELD");
-            }
-        }
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     BaseItem item = PlayerInventory.Instance.getHeldItem();
+        //     if (item != null)
+        //     {
+        //         PlayerInventory.Instance.getHeldItem().leftClickAction();
+        //     }
+        //     else
+        //     {
+        //         print("NO ITEM HELD");
+        //     }
+        // }
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     BaseItem item = PlayerInventory.Instance.getHeldItem();
+        //     if (item != null)
+        //     {
+        //         PlayerInventory.Instance.getHeldItem().rightClickAction();
+        //     }
+        //     else
+        //     {
+        //         print("NO ITEM HELD");
+        //     }
+        // }
     }
 
     public void pickUpItem(BaseItem item)
     {
         PlayerInventory.Instance.addToInventory(item);
         PlayerInventory.Instance.displayInventoryToConsole();
+    }
+
+    public void recceiveDamage(DamageEvent damageEvent)
+    {
+        health -= damageEvent.damageAmount;
+        if (health <= 0 )
+        {
+            die();
+        }
+        print(damageEvent.knockbackValue);
+        if(damageEvent.knockbackValue > knockbackResistance){
+            //Full on being flung back
+            //It's actually force not speed btw
+
+
+            movementLockFlag = true;
+            timeSinceMovementLock = 0f;
+            float knockbackSpeed;
+
+            if(damageEvent.knockbackValue >= 10f){
+                timeToWaitForMovementLock = ((damageEvent.knockbackValue - knockbackResistance) * (maxMovementLocktime - minMovementLockTime) / (10f) + minMovementLockTime) * flungMultiplier;
+                if (timeToWaitForMovementLock > maxMovementLocktime * flungMultiplier){
+                    timeToWaitForMovementLock = maxMovementLocktime * flungMultiplier;
+                }
+
+                knockbackSpeed = ((damageEvent.knockbackValue - knockbackResistance) * (maxKnockbackSpeed - minKnockbackSpeed) / (10f) + minKnockbackSpeed) * flungMultiplier;
+                if (knockbackSpeed > maxKnockbackSpeed * flungMultiplier){
+                    knockbackSpeed = maxKnockbackSpeed * flungMultiplier;
+                }
+
+            }else{
+                //From knockbackResistance - 10
+                
+                timeToWaitForMovementLock = (damageEvent.knockbackValue - knockbackResistance) * (maxMovementLocktime - minMovementLockTime) / (10f - knockbackResistance) + minMovementLockTime;
+                knockbackSpeed = ((damageEvent.knockbackValue - knockbackResistance) * (maxKnockbackSpeed - minKnockbackSpeed) / (10f) + minKnockbackSpeed) * flungMultiplier;
+
+            }
+            damageEvent.target.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+            print(damageEvent.getKnockbackDirection().normalized);
+            print(knockbackSpeed);
+            damageEvent.target.GetComponent<Rigidbody2D>().AddForce(damageEvent.getKnockbackDirection().normalized * knockbackSpeed * 10);
+            
+        }
+    }
+
+    private void die()
+    {
+
+    }
+
+    public float getHealth(){
+        return health;
     }
 }

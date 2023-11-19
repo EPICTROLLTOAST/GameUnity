@@ -1,3 +1,4 @@
+using System.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
@@ -20,7 +21,8 @@ public class DamageEvent
     public damageTypes damageType;
     public GameObject attacker;
     public GameObject target;
-    public float knockbackValue = 1f;
+    public float knockbackValue = 0f;
+    Vector2 knockbackDirection;
     
 
     public DamageEvent(float damageAmount, damageTypes damageType, GameObject attacker, GameObject target, float knockbackValue)
@@ -42,10 +44,27 @@ public class DamageEvent
         target.GetComponent<IDamageable>().recceiveDamage(this);
     }
     
+    public DamageEvent(float damageAmount, damageTypes damageType, GameObject attacker, GameObject target, float knockbackValue, Vector2 knockbackDirection){
+        this.damageAmount = damageAmount;
+        this.damageType = damageType;
+        this.attacker = attacker;
+        this.target = target;
+        this.knockbackValue = knockbackValue;
+        this.knockbackDirection = knockbackDirection;
+        target.GetComponent<IDamageable>().recceiveDamage(this);
+    }
+    
 
+
+    public Vector2 getKnockbackDirection(){
+        if(knockbackDirection != null){
+            return knockbackDirection;
+        }else{
+            return (target.transform.position - attacker.transform.position);
+        }
+    }
 
 }
-
 
 
 public interface IDamageable
