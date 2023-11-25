@@ -539,6 +539,14 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7173709144443303989, guid: fe33bb26a8ddc3446bb1818fad87d971, type: 3}
+      propertyPath: maxMovementLocktime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173709144443303989, guid: fe33bb26a8ddc3446bb1818fad87d971, type: 3}
+      propertyPath: minMovementLockTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7193177108913928317, guid: fe33bb26a8ddc3446bb1818fad87d971, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.163
@@ -915,8 +923,8 @@ MonoBehaviour:
   movementLockFlag: 0
   maxKnockbackSpeed: 20
   minKnockbackSpeed: 2
-  maxMovementLocktime: 3
-  minMovementLockTime: 1
+  maxMovementLocktime: 0.8
+  minMovementLockTime: 0.2
   flungMultiplier: 2
   debugKnockback: 5
 --- !u!50 &343004100
@@ -2803,7 +2811,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1001 &1592470935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2876,6 +2884,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -7672851044457220799, guid: d66b3a16c09bd2644a11003898ea8d00, type: 3}
+    - target: {fileID: 9010906933031925869, guid: 79bfbc57164db6a49b53fd9d43ccc377, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3172,7 +3184,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1975693731
 GameObject:
   m_ObjectHideFlags: 0
