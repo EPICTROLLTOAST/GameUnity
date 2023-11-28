@@ -11,7 +11,8 @@ public class BarrelManager : MonoBehaviour
     float maxDistanceFromBarrel = 10f;
     [SerializeField]
     float forceToUse = 10f;
-
+    [SerializeField]
+    float damageToDeal = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +42,7 @@ public class BarrelManager : MonoBehaviour
                 float distance = dir.magnitude;
                 dir = dir.normalized;
                 dir = distance != 0? dir * forceToUse/(distance * distance) : new Vector2(0,0);
-                rb.AddForce(dir);
+                new DamageEvent(damageToDeal, damageTypes.FIRE, rb.gameObject, gameObject, dir.magnitude);
             }
         }
         Destroy(gameObject);
