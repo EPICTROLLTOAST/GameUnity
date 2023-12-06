@@ -12,7 +12,7 @@ public class ArrowHandler : MonoBehaviour
     
     GameObject originEnemy;
     [SerializeField]
-    String enemyTag = "Player";
+    public String enemyTag = "Player";
 
     public void setOriginEnemy(GameObject gameObjectR){
         originEnemy = gameObjectR;
