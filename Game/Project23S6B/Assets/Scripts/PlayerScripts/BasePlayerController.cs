@@ -64,7 +64,10 @@ public class BasePlayerController : MonoBehaviour, IDamageable
     [SerializeField]
     [Range(0f, 5f)]
     float delayBeforeStartingTDash = 0.5f;
+    [SerializeField]
+    GameObject[] itemsInInventory;
 
+    GameObject activeItem;
 
     float dashTimeoutCounter = 0f;
     bool buttonsDashSpeedSet = false;
@@ -80,6 +83,12 @@ public class BasePlayerController : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        for(int i = 0; i < 10; i ++){
+            if(Input.GetKeyDown(KeyCode.Alpha0 + i)){
+                changeItem(i);
+            }
+        }
+
         if(isDashing || prepDashing){
             //dash timeout
             dashTimeoutCounter += Time.deltaTime;
@@ -112,6 +121,8 @@ public class BasePlayerController : MonoBehaviour, IDamageable
             //Stop prep dashing
 
         }
+
+
 
     }
     public void playerMovementKeyCheck()
@@ -339,6 +350,21 @@ public class BasePlayerController : MonoBehaviour, IDamageable
         }
 
         return false;
+    }
+
+    void changeItem(int itemNumber){
+        if(itemNumber == 0){
+            if(activeItem != null){
+                Destroy(activeItem);
+            }
+            activeItem = null;
+        }else{
+            if(activeItem != null){
+                Destroy(activeItem);
+                activeItem = null;
+            }
+            activeItem = Instantiate(itemsInInventory[itemNumber - 1], gameObject.transform);
+        }
     }
 
     private void die()

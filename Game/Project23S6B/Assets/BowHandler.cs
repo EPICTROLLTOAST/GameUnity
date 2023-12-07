@@ -52,6 +52,8 @@ public class BowHandler : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");    
         RAP = arm.GetComponent<RotateAroundPivot>();
         BPC = player.GetComponent<BasePlayerController>();
+        lookingRight = 
+        Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= gameObject.transform.position.x ? true : false;
     }
 
 

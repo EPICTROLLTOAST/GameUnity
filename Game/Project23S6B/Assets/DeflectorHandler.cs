@@ -47,6 +47,9 @@ public class DeflectorHandler : MonoBehaviour
         RAP = GetComponent<RotateAroundPivot>();
         player = GameObject.FindGameObjectWithTag("Player");
         BPC = player.GetComponent<BasePlayerController>();
+        //Check if the player is looking right
+        lookingRight = 
+        Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= gameObject.transform.position.x ? true : false;
     }
 
     // Update is called once per frame
