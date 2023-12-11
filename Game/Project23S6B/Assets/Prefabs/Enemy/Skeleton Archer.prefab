@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4008687513713720357}
   - component: {fileID: 8977159945733898393}
   - component: {fileID: 7173709144443303989}
+  - component: {fileID: 5880443677842212947}
   m_Layer: 0
   m_Name: Skeleton Archer
   m_TagString: Enemy
@@ -261,6 +262,12 @@ MonoBehaviour:
   health: 0
   orientation: 1
   movementManager: {fileID: 0}
+  knockbackResistance: 1
+  maxKnockbackSpeed: 20
+  minKnockbackSpeed: 2
+  maxMovementLocktime: 1
+  minMovementLockTime: 0.5
+  flungMultiplier: 2
   attackDistance: 15
   playerPresence: 0
   distanceToRecogPlayer: 20
@@ -272,6 +279,33 @@ MonoBehaviour:
   speed: 3
   bow: {fileID: 9166228103626891570}
   pivot: {fileID: 8155708397772528017}
+--- !u!50 &5880443677842212947
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536460072012044081}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &3061074228416545364
 GameObject:
   m_ObjectHideFlags: 0

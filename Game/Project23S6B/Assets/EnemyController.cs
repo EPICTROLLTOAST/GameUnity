@@ -95,7 +95,6 @@ public class EnemyController : MonoBehaviour, IDamageable
         if(health <= 0f){
             die();
         }
-        print(damageEvent.knockbackValue);
         if(damageEvent.knockbackValue > knockbackResistance){
             //Full on being flung back
             //It's actually force not speed btw
@@ -127,8 +126,6 @@ public class EnemyController : MonoBehaviour, IDamageable
 
             }
             damageEvent.target.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-            print(damageEvent.getKnockbackDirection().normalized);
-            print(knockbackSpeed);
             damageEvent.target.GetComponent<Rigidbody2D>().AddForce(damageEvent.getKnockbackDirection().normalized * knockbackSpeed * 10);
         }
     }

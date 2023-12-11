@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5544337213203216221}
   - component: {fileID: 3347857199743357954}
   - component: {fileID: 7697569886368767775}
+  - component: {fileID: 8364406578817563137}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -260,6 +261,12 @@ MonoBehaviour:
   health: 0
   orientation: 1
   movementManager: {fileID: 0}
+  knockbackResistance: 1
+  maxKnockbackSpeed: 20
+  minKnockbackSpeed: 2
+  maxMovementLocktime: 3
+  minMovementLockTime: 1
+  flungMultiplier: 2
   attackDistance: 1.5
   playerPresence: 0
   distanceToRecogPlayer: 10
@@ -280,6 +287,33 @@ MonoBehaviour:
   timerSinceAnimStateChange: 0
   pivot: {fileID: 3837646042784363463}
   rotateAroundPivot: {fileID: 0}
+--- !u!50 &8364406578817563137
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353290575172821243}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &3837646042784363463
 GameObject:
   m_ObjectHideFlags: 0

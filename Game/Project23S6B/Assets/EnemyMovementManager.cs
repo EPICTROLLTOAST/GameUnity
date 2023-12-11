@@ -148,7 +148,6 @@ public class EnemyMovementManager : MonoBehaviour
         {
             baseRange = LOSRadius;
             deviation = LOSDeviation;
-            print(deviation);
             iterations = LOSIterations;
             randomness = LOSRandomness;
             rangeRange = LOSRangeRandomness;
