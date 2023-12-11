@@ -54,6 +54,17 @@ public class EnemySpawnerController : MonoBehaviour
 
     [SerializeField]
     internal object[] toSpawnList = new object[]{new object[]{null, 1f}};
+
+    public enum spawnLogics{
+        point,
+        circle
+    }
+    
+    [SerializeField]
+    internal spawnLogics spawnLogic = spawnLogics.point;
+    public float spawnRadius = 1f;
+
+
     public int amountOfEnemies;
     bool active = false;
     int roundNumber = 0;
@@ -75,7 +86,7 @@ public class EnemySpawnerController : MonoBehaviour
         if(active){
             timeSinceLastSpawn += Time.deltaTime;
             timeActive += Time.deltaTime;
-            
+            toSpawnList = toSpawnMatrix.getArray();
 
             //Do anything that needs to be done
             switch (spawnType){
@@ -214,9 +225,34 @@ public class EnemySpawnerController : MonoBehaviour
     }
 
     void spawnEnemy(GameObject enemyToSpawn){
+        spawnEnemy(enemyToSpawn, 0);
+    }
 
+    void spawnEnemy(GameObject enemyToSpawn, int timeouts){
         toSpawnList = toSpawnMatrix.getArray();
-        GameObject.Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
+
+        switch(spawnLogic){
+            case spawnLogics.point:
+                GameObject.Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
+                break;
+
+            case spawnLogics.circle:
+                float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+                //Using a logistic curve to weight the values more towards the edge of the circle
+                Vector3 spawnPosition = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f).normalized * (spawnRadius)/(1 + Mathf.Exp(-1*(Random.Range(spawnRadius/2, 10f) - spawnRadius/2)));
+
+                if(AstarPath.active.GetNearest(transform.position + spawnPosition).node.Walkable == true){
+                    GameObject.Instantiate(enemyToSpawn, transform.position + spawnPosition, Quaternion.identity, transform);
+                }else{
+                    if(timeouts > 10){
+                        GameObject.Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
+                    }
+                    spawnEnemy(enemyToSpawn, timeouts + 1); //Recursion and being lazy XD
+                }
+
+                break;
+        }
+
     }
 
     
@@ -373,6 +409,13 @@ public class EnemySpawnerControllerEditor : Editor{
                 EditorGUILayout.EndHorizontal();
             }
 
+        }
+
+        EditorGUILayout.Space();
+        myScript.spawnLogic = (EnemySpawnerController.spawnLogics)EditorGUILayout.EnumPopup("Spawn logic", myScript.spawnLogic);
+        
+        if(myScript.spawnLogic == EnemySpawnerController.spawnLogics.circle){
+            myScript.spawnRadius = EditorGUILayout.FloatField("Spawn radius", myScript.spawnRadius);
         }
 
         myScript.toSpawnMatrix.setArray(myScript.toSpawnList);
